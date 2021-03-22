@@ -30,24 +30,24 @@ The host user will be able to set up a trvia game in variety of sources for ques
 ## Data Model
 ![data model for tribbekR](ProposalItems/Capston%20Proposal%20-%20Process%20Map.png)
 *Core Process
- -1. User - Host creation
- -2. Game session creation
-     -1. Define settings for game
-     -2. Pull data from API (category/questions)
- -3. Completion/Show cumulative data
+ -1 User - Host creation
+ -2 Game session creation
+     -1 Define settings for game
+     -2 Pull data from API (category/questions)
+ -3 Completion/Show cumulative data
 *Multi Session Support
- -1. Settings/Points awards preseved for set/unset future sessions
-     -1. Save host inputed player data/points
-     -2. Ability to resume
-     -3. Ability to add sessions
+ -1 Settings/Points awards preseved for set/unset future sessions
+     -1 Save host inputed player data/points
+     -2 Ability to resume
+     -3 Ability to add sessions
 *Custom Gane Support
- -1. Model to hold custom questions
+ -1 Model to hold custom questions
     *User - Host will have access
 *Player Implementation Support (Unknown process - websockets)
- -1. User - Player creation ability
- -2. User - Player log in
+ -1 User - Player creation ability
+ -2 User - Player log in
     -*Track past points/wins
- -3. REAL TIME ANSWER SUBMISSION SUPPORT
+ -3 REAL TIME ANSWER SUBMISSION SUPPORT
     -*Currently insufficient knowledge for the developer - Wish to accomplish
 
 ## Schedule
