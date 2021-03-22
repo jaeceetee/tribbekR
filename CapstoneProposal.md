@@ -53,45 +53,45 @@ The host user will be able to set up a trvia game in variety of sources for ques
 ## Schedule
 
 ### Week 1
-- [ ]Develop Core Functions
-    - [ ]"storyboard" for visual mock up for Process Map
-    - [ ]User - Host model set up
-    - [ ]Game Setup
-    - [ ]Sources/API
-    - [ ]Complete 1 game
+- [ ] Develop Core Functions
+    - [ ] "storyboard" for visual mock up for Process Map
+    - [ ] User - Host model set up
+    - [ ] Game Setup
+    - [ ] Sources/API
+    - [ ] Complete 1 game
 
 ### Week 2
-- [ ]Multi-Session Implementation
-    - [ ]Model for game preservation
-    - [ ]Setting for multiple/league mode
-- [ ]Custom Game Implementation
-    - [ ]Model for User - Host input category
-    - [ ]Input/Review interface
+- [ ] Multi-Session Implementation
+    - [ ] Model for game preservation
+    - [ ] Setting for multiple/league mode
+- [ ] Custom Game Implementation
+    - [ ] Model for User - Host input category
+    - [ ] Input/Review interface
 
 ### Week 3
-- [ ]Player Implementation
-    - [ ]Model for player
-    - [ ]Login/Logout interface
-    - [ ]Player Profile/Past Scores
-    - [ ]Real-time answer submit by Player
-        - [ ]Websocket(???)
-        - [ ]Interface for submition - Simple A-D/E boxes and T/F boxes
+- [ ] Player Implementation
+    - [ ] Model for player
+    - [ ] Login/Logout interface
+    - [ ] Player Profile/Past Scores
+    - [ ] Real-time answer submit by Player
+        - [ ] Websocket(???)
+        - [ ] Interface for submition - Simple A-D/E boxes and T/F boxes
 
 ### Week 4
-- [ ]Extra time in case of bottleneck/implement "wishlist" items
-- [ ]Presentation Prep
-    - [ ]Determine Flow of the presentation
-    - [ ]Tell a story
-    - [ ]Insure following are noted
-      - [ ]User States
-      - [ ]API's Used
-      - [ ]Custom Abilities
-      - [ ]Multi-Session
-      - [ ]User - Player Experience
+- [ ] Extra time in case of bottleneck/implement "wishlist" items
+- [ ] Presentation Prep
+    - [ ] Determine Flow of the presentation
+    - [ ] Tell a story
+    - [ ] Insure following are noted
+      - [ ] User States
+      - [ ] API's Used
+      - [ ] Custom Abilities
+      - [ ] Multi-Session
+      - [ ] User - Player Experience
       - [ ] (Room to edit)
 
 ### Wishlist/Future Implementation
-- [ ]DETAILED Answer boxes pushed to User Devices
-- [ ]Easy code based login/play - Single Instance - No Save Data
-- [ ]Smooth exchanges in interface
+- [ ] DETAILED Answer boxes pushed to User Devices
+- [ ] Easy code based login/play - Single Instance - No Save Data
+- [ ] Smooth exchanges in interface
  
