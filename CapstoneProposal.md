@@ -53,13 +53,12 @@ The host user will be able to set up a trvia game in variety of sources for ques
 ## Schedule
 
 ### Week 1
--[ ]Develop Core Functions
-
-    - [ ]"storyboard" for visual mock up for Process Map
-    - [ ]User - Host model set up
-    - [ ]Game Setup
-    - [ ]Sources/API
-    - [ ]Complete 1 game
+[ ]Develop Core Functions
+    [ ]"storyboard" for visual mock up for Process Map
+    [ ]User - Host model set up
+    [ ]Game Setup
+    [ ]Sources/API
+    [ ]Complete 1 game
 
 ### Week 2
 -[ ]Multi-Session Implementation
