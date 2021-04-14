@@ -1,0 +1,84 @@
+{% extends 'trivia/base.html' %}
+{% load static %}
+
+{% block title %}
+New Game!
+{% endblock %}
+
+{% block content %}
+<nav>login/navigation placeholder</nav>
+<div>
+    <form action="{% url 'trivia:create_game' %}" method="post">
+        {% csrf_token %}
+        <label for="GameLeagueName">Enter Game/League Name</label>
+        <input type="text" name="GameLeagueName">
+        <label for="">Check if League</label>
+        <input type="checkbox" name="LeagueYN">
+        <label for="PlayerNum">Select number of Teams/Players</label>
+        <select name="PlayerNum">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7</option>
+            <option value=8>8</option>
+            <option value=9>9</option>
+            <option value=10>10</option>
+        </select>
+        <div id="get-category-data">
+            <label for="Category">Trivia Question Category</label>
+            <select v-model="category" @change="showDetail"  name="category">
+                {% for cat in categories %}
+                <option value="{{cat.id}}">{{cat.name}}</option>
+                {% endfor %}
+            </select>
+            <p>placeholder for category fetch data <br>
+                Total Questions: <% totalQCount %> <br>
+                Easy Questions: <% totalEasyQCount %> <br>
+                Medium Questions: <% totalMedQCount %> <br>
+                Hard Questions: <% totalHardQCount %>
+            </p>
+        </div>
+        <label for=""># of questions</label>
+        <input type="number" name="questionNum">
+
+        <input type="submit" value="Create Game">
+    </form>
+</div>
+<script>
+    let app = new Vue({
+    el: '#get-category-data',
+    delimiters: ['<%', '%>'],
+    data: {
+        category: null,
+        totalQCount: 0,
+        totalHardQCount: 0,
+        totalMedQCount: 0,
+        totalEasyQCount: 0,
+
+    },
+    methods: {
+        showDetail: async function() {
+            console.log(this.category)
+            let response = await axios({
+                method: 'get',
+                url: 'https://opentdb.com/api_count.php',
+                params: {
+                    category: this.category,
+                }
+            })
+            let data = response.data.category_question_count
+            this.totalEasyQCount = data.total_easy_question_count
+            this.totalMedQCount = data.total_medium_question_count
+            this.totalHardQCount = data.total_hard_question_count
+            this.totalQCount = data.total_question_count
+            console.log(data)
+
+        }
+
+    }
+})
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'Users/base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="{% url 'Users:login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Username:" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <label>
+            Host Game
+            <input type="radio" name="hostYN" id="host" value="Host">
+
+        </label>
+        <label>
+            Play Game
+            <input type="radio" name="hostYN" id="player" Value="Player" checked>
+            
+        </label>
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+{% endblock %}

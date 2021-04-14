@@ -1,0 +1,47 @@
+{% extends 'trivia/base.html' %}
+
+{% block title %}{{ room_name }}: Question {{ question_num }}{% endblock %}
+
+{% block content %}Game
+<div>
+    <h3 id="play1">player 1</h3>
+    <h3 id="play2">player 2</h3>
+    <h3 id="play3">player 3</h3>
+    <h3 id="play4">player 4</h3>
+    <h3 id="play5">player 5</h3>
+    <h3 id="play6">player 6</h3>
+    <h3 id="play7">player 7</h3>
+    <h3 id="play8">player 8</h3>
+    <h3 id="play9">player 9</h3>
+    <h3 id="play10">player 10</h3>
+
+    <button type="submit">Play!</button>
+
+
+</div>
+
+
+
+
+
+<div id="user-hello"></div>
+<!-- takes room_name variable and passes it into script variable room-name -->
+{{ room_name|json_script:"room-name" }} 
+<script>
+    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const chatSocket = new WebSocket(
+        'ws://' +
+        window.location.host +
+        '/ws/trivia/' +
+        roomName +
+        '/'
+        
+        );
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        document.querySelector('#user-hello').innerHTML = (data.tester)
+    }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'trivia/base.html' %}
+{% load static %}
+
+{% block title %}
+Question {{ question_num }}
+{% endblock %}
+
+{% block content %}
+
+<div id="play">
+
+    {{question.question_num}}
+    {{question.question}}
+    
+    {% if question.truefalse == True %}
+        <input type="radio" name="answer" id="True" value="True">True
+        <input type="radio" name="answer" id="False" value="False">False
+    {% else %}
+        {% for choice in choices %}
+            <input type="radio" name="answer" id="{{ forloop.counter }} value="{{ forloop.counter }}"> {{ forloop.counter }} - {{choice}}
+        {% endfor %}
+    {% endif %}
+    <button type="submit">Submit</button>
+</div>
+
+<div id="wait">
+    <P>Please wait for host</P>
+</div>
+<div id="user-hello"></div>
+{{ game_num|json_script:"game_num" }} 
+<script>
+    const roomName = JSON.parse(document.getElementById('game_num').textContent);
+    const chatSocket = new WebSocket(
+        'ws://' +
+        window.location.host +
+        '/ws/trivia/' +
+        roomName +
+        '/'
+        
+        );
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        document.querySelector('#user-hello').innerHTML = (data.player)
+    }
+</script>
+
+{%  endblock %}

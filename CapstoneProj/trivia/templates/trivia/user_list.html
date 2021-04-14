@@ -1,0 +1,17 @@
+{% extends 'trivia/base.html' %}
+
+{% block title %}User List{% endblock title %}
+
+{% block content %}
+  <script>
+    var socket = new WebSocket('ws://' + window.location.host + '/users/');
+
+    socket.onopen = function open() {
+      console.log('WebSockets connection created.');
+    };
+
+    if (socket.readyState == WebSocket.OPEN) {
+      socket.onopen();
+    }
+  </script>
+{% endblock content %}

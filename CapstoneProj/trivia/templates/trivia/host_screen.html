@@ -1,0 +1,66 @@
+{% extends 'trivia/base.html' %}
+
+{% block title %}Game - {{ game_name }}{% endblock %}
+
+{% block content %}
+<div id="game-display">
+    <H1 id="game-name">Game - {{ game_name }}</H1>
+</div>
+
+<div id="trivia">
+    {{question.question_num}}
+    {{question.question}}
+    
+    {% if question.truefalse == True %}
+        <input type="radio" name="answer" id="True" value="True">True
+        <input type="radio" name="answer" id="False" value="False">False
+    {% else %}
+        {% for choice in choices %}
+            <input type="radio" name="answer" id="{{ forloop.counter }} value="{{ forloop.counter }}"> {{ forloop.counter }} - {{choice}}
+        {% endfor %}
+    {% endif %}
+    <button id="next" v-bind:onclick="nextQuestion">Submit</button>
+</div>
+<div id="waiting">
+    <div id="players-list">
+    </div>
+    <button>Let's Play</button>
+</div>
+
+<div id=""></div>
+ 
+<!-- takes game_num variable and passes it into script variable room-name -->
+{{ game_num|json_script:"room-name" }} 
+<script>
+    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const chatSocket = new WebSocket(
+        'ws://' +
+        window.location.host +
+        '/ws/trivia/' +
+        roomName +
+        '/'
+        
+        );
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        if (data.player != null){
+            let player_div = document.getElementById('players-list')
+            let player = document.createElement('h3')
+
+            let num = player_div.childElementCount + 1
+            
+            player.id = data.player
+            player.innerText = num + ": " + data.player
+            player_div.appendChild(player)
+
+        } else if((data.remove_player != null)){
+            let player_div = document.getElementById('players-list')
+            let remove_player = document.getElementById(data.remove_player)
+
+            player_div.removeChild(remove_player)
+        }
+    }
+</script>
+
+{% endblock %}

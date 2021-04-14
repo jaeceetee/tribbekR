@@ -1,0 +1,12 @@
+{% extends 'Users/base.html' %}
+
+{% block title %}
+Home - {{user.username}}
+{% endblock %}
+
+{% block content %}
+<h1>hi {{user.username}}</h1>
+<a href="{% url 'trivia:create_game' %}">create game</a>
+<a href="{% url 'trivia:play_game' %}">play game</a>
+
+{% endblock %}

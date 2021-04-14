@@ -1,0 +1,21 @@
+{% extends 'Users/base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="{% url 'Users:register' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Username:" name="username" required>
+        <input type="email" placeholder="Email:" name="email" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <input type="password" placeholder="Confirm Password" name="confirm_pass" required>
+        <input type="submit" value="Signup">
+        <a href="{% url 'Users:login' %}">Already registered? Click here!</a>
+    </form>
+</div>
+
+
+{% endblock %}
