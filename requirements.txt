@@ -9,3 +9,4 @@ sqlparse==0.4.1
 whitenoise==5.2.0
 djangorestframework==3.12.4
 Channels==3.0.3
+requests==2.22.0
