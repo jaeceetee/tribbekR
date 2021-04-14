@@ -140,7 +140,7 @@ CHANNEL_LAYERS = {
 CACHES = {
     "default": {
          "BACKEND": "redis_cache.RedisCache",
-         "LOCATION": os.environ.get('REDIS_URL'),
+         "LOCATION": os.environ.get('HEROKU_REDIS_ROSE_URL'),
     }
 }
 if 'DATABASE_URL' in os.environ:
