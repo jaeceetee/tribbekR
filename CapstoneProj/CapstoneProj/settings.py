@@ -26,7 +26,7 @@ SECRET_KEY = 'j7q%xmn+4#pl!n2=$=e42eix*%_dmfq(jd+9ro%y8j3i*-!0)6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [tribbekr.herokuapp.com]
+ALLOWED_HOSTS = ['tribbekr.herokuapp.com']
 
 
 # Application definition
