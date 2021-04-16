@@ -36,6 +36,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'trivia.apps.triviaConfig',
+    'app.trivia'
     'django.contrib.contenttypes',
     'channels',
     'trivia',
