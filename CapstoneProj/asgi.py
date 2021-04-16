@@ -14,11 +14,7 @@ sys.path.append(BASE_DIR)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstoneProj.settings")
 import django
-
-# from django.conf import settings
-# settings.configure(DEBUG=True)
 django.setup()
-
 
 from django.conf.urls import url
 from django.core.asgi import get_asgi_application
@@ -28,22 +24,16 @@ from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from trivia.routing import websocket_urlpatterns
-from channels.security.websocket import OriginValidator
+from trivia import consumers
 
 
 application = ProtocolTypeRouter({
   "http": AsgiHandler(),
-  # "channels": ChannelNameRouter({
-  #   "update-question": consumers.question.as_asgi(),
-
-  # }),
-  'websocket': OriginValidator(
-    AuthMiddlewareStack(
+  'websocket':AuthMiddlewareStack(
       URLRouter(
         websocket_urlpatterns
       )
-    ),
-    [".heroku.com", "https://.heroku.com:80"],
-  )
+    )
+  
   ## IMPORTANT::Just HTTP for now. (We can add other protocols later.)
 })

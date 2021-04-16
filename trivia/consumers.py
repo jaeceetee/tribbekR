@@ -47,13 +47,17 @@ class TriviaConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def create_score_data(self, player, game):
-        score = ScoreData(game_id=game.game_id, player_id=player.player_id)
+        print(player)
+        (print(game))
+        score =ScoreData(game_id=game, player_id=player, score=0)
+        print(score)
         score.save()
         NoReturn
 
     @database_sync_to_async
     def delete_score_data(self, player, game):
         score = ScoreData.objects.filter(game_id=game.game_id, player_id=player.player_id)
+        print(score)
         score.delete()
 
     @database_sync_to_async
@@ -63,11 +67,11 @@ class TriviaConsumer(AsyncWebsocketConsumer):
     
     @database_sync_to_async
     def get_player_data(self):
-        if PlayerData.objects.get(name = self.user.username) is None:
+        try:
+            player = PlayerData.objects.get(name = self.user.username)
+        except:
             player = PlayerData(name = self.user.username)
             player.save()
-        else:
-            player = PlayerData.objects.get(name = self.user.username)
 
         return player
 
@@ -85,7 +89,7 @@ class TriviaConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
     async def user_disconnect(self, event):
-        player = self.get_player_data()
+        player = await self.get_player_data()
         game = await self.get_game_data()
         await self.delete_score_data(player=player, game=game)
         remove_player = event['user']

@@ -3,40 +3,143 @@
 {% block title %}Game - {{ game_num }}{% endblock %}
 
 {% block content %}
-<div id="game-display">
-    <H1 id="game-name">Game - {{ game_num }}</H1>
-    <h2 id="total_question">{{ total_questions }} </h2>
-</div>
+<div id='background'>
 
-<div id="trivia">
-    <div id='game' >
-        <h1>Question [[ currquestion_num ]]</h1>
-        <h2>[[ currquestion ]]</h2>
-        <section id="multiple" v-if="[[ currtruefalse ]] == 'true' ">
-            <ul>
-                <li>True</li>
-                <li>False</li>
-            </ul>
-        </section>
-        <section id="truefalse" v-else>
-            <ol>
-                <li> [[ curranswers[0] ]]</li>
-                <li> [[ curranswers[1] ]]</li>
-                <li> [[ curranswers[2] ]]</li>
-                <li> [[ curranswers[3] ]]</li>
-            </ol>
-        </section>
-        
-
-
-        <button id="next" v-on:click='nextQuestion'>next</button>
-        <button id="showanswers" v-on:click='showAnswers'>And the answer is...</button>
-    </div>
-    <div id="waiting">
-        <div id="players-list">
+    <main>
+        <div id="game-display">
+            <H1 id="game-name">Game - {{ game_num }}</H1>
+            <h2 id="total_question">{{ total_questions }} </h2>
         </div>
-        <button v-on:click='startGame' >Let's Play</button>
-    </div>
+        
+        <div id="trivia">
+            <div id='game' display="none">
+                <h1>Question [[ currquestion_num ]]</h1>
+                <h2>[[ currquestion ]]</h2>
+                <section id="multiple" v-if="[[ currtruefalse ]] == 'true' ">
+                    <ul>
+                        <li class="answers">True</li>
+                        <li class="answers">False</li>
+                    </ul>
+                </section>
+                <section id="truefalse" v-else>
+                    <ol>
+                        <li class="answers"> [[ curranswers[0] ]]</li>
+                        <li class="answers"> [[ curranswers[1] ]]</li>
+                        <li class="answers"> [[ curranswers[2] ]]</li>
+                        <li class="answers"> [[ curranswers[3] ]]</li>
+                    </ol>
+                </section>
+                
+        
+        
+                <button class="dark_item" id="next" v-on:click='nextQuestion'>Show Answers!</button>
+            </div>
+            <div id="waiting">
+                <div id="players-list">
+
+                    <section class="player-boxes">
+                        <input type="text" name="player_0" v-model="player_data[0].player_name" placeholder="player 1">
+                        <label v-if='player_data[0].score >> 0'>[[ player_data[0].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_1" v-model="player_data[1].player_name" placeholder="player 2">
+                        <label v-if=' player_data[1].score >> 0'>[[ player_data[1].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_2" v-model="player_data[2].player_name" placeholder="player 3">
+                        <label v-if=' player_data[2].score >> 0'>[[ player_data[2].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_3" v-model="player_data[3].player_name" placeholder="player 4">
+                        <label v-if=' player_data[3].score >> 0'>[[ player_data[3].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_4" v-model="player_data[4].player_name" placeholder="player 5">
+                        <label v-if=' player_data[4].score >> 0'>[[ player_data[4].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_5" v-model="player_data[5].player_name" placeholder="player 6">
+                        <label v-if=' player_data[5].score >> 0'>[[ player_data[5].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_6" v-model="player_data[6].player_name" placeholder="player 7">
+                        <label v-if=' player_data[6].score >> 0'>[[ player_data[6].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+                    <section class="player-boxes">
+                        <input type="text" name="player_7" v-model="player_data[7].player_name" placeholder="player 8">
+                        <label v-if=' player_data[7].score >> 0'>[[ player_data[7].score ]]</label>
+                        <select hidden="true" name="player_answer" >
+                            <option value="A"></option>
+                            <option value="B"></option>
+                            <option value="C"></option>
+                            <option value="D"></option>
+                            <option value="T"></option>
+                            <option value="F"></option>
+                        </select>
+                    </section>
+
+                </div>
+                <button class="dark_item" v-on:click='startGame' >Let's Play</button>
+            </div>
+        </div>
+    
+    </main>
 </div>
 
 
@@ -67,15 +170,32 @@
         const data = JSON.parse(e.data);
         console.log(data)
         if (data.player != null){
-            let player_div = document.getElementById('players-list')
-            let player = document.createElement('button')
-            
-            let num = player_div.childElementCount + 1
-            player.name = num
-            player.value = data.player
-            player.innerText = data.player
 
-            player_div.appendChild(player)
+            for (let i = 0; i < 8; i++){
+                console.log("player_"+ i.toString())
+                let item_string = "player_"+ i.toString()
+                let item = document.getElementsByName(item_string)
+                console.log(item[0])
+                console.log(item[0].placeholder)
+                if (item[0].value == ''){
+                    item[0].value = data.player
+                    break
+                }
+            }
+            // for (let data of app1.$player_data){
+            //     if (data.player_name == ''){
+            //         data.player_num = data.player
+            //     }
+            // }
+            // let player_div = document.getElementById('players-list')
+            // let player = document.createElement('button')
+            
+            // let num = player_div.childElementCount + 1
+            // player.name = num
+            // player.value = data.player
+            // player.innerText = data.player
+
+            // player_div.appendChild(player)
 
         } else if(data.remove_player != null){
             let player_div = document.getElementById('players-list')

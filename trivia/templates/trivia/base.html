@@ -13,8 +13,13 @@
     <script type='module' src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
     {% load static %}
     <script type='module' defer src="{% static 'trivia/main.js' %}"></script>
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+
     {% block content %}
     {% endblock %}    
 </body>

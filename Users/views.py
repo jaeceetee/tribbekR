@@ -21,12 +21,17 @@ def register_user(request):
 
             login(request, user)
 
-            return HttpResponseRedirect(reverse('Users.register'))
+            return HttpResponseRedirect(reverse('Users:user_home'))
         else:
-            print("Username has been taken! Try a new username!")
-    return render(request, 'Users/register.html')
+            context = {
+                "error": "Username has been taken! Try a new username!"
+            }
+
+    return render(request, 'Users/register.html', context)
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('Users:user_home'))
     if request.method == "POST":
         form = request.POST
         username = form['username']
@@ -50,3 +55,7 @@ def user_home(request):
 
 def index(request):
     return render(request, "Users/login.html")
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('Users:register'))

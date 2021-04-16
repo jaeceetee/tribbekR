@@ -5,23 +5,21 @@ Login
 {% endblock %}
 
 {% block content %}
-<div>
-    <form action="{% url 'Users:login' %}" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="Username:" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <label>
-            Host Game
-            <input type="radio" name="hostYN" id="host" value="Host">
 
-        </label>
-        <label>
-            Play Game
-            <input type="radio" name="hostYN" id="player" Value="Player" checked>
+<div id="background">
+    <main>
+        <div>
+
             
-        </label>
-        <input type="submit" value="Login">
-    </form>
+            <form action="{% url 'Users:login' %}" method="post">
+                {% csrf_token %}
+                <input class="dark_item" type="text" placeholder="Username:" name="username" required>
+                <input class="dark_item" type="password" placeholder="Password" name="password" required>
+                <input class="dark_item" type="submit" value="Login">
+            </form>
+            <a href="{% url 'Users:register' %}">Not registered? Sign up here!</a>
+        </div>
+    </main>
 </div>
 
 {% endblock %}

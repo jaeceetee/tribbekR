@@ -6,46 +6,47 @@ New Game!
 {% endblock %}
 
 {% block content %}
-<nav>login/navigation placeholder</nav>
-<div>
-    <form action="{% url 'trivia:create_game' %}" method="post">
-        {% csrf_token %}
-        <label for="GameLeagueName">Enter Game/League Name</label>
-        <input type="text" name="GameLeagueName">
-        <label for="">Check if League</label>
-        <input type="checkbox" name="LeagueYN">
-        <label for="PlayerNum">Select number of Teams/Players</label>
-        <select name="PlayerNum">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-            <option value=6>6</option>
-            <option value=7>7</option>
-            <option value=8>8</option>
-            <option value=9>9</option>
-            <option value=10>10</option>
-        </select>
-        <div id="get-category-data">
-            <label for="Category">Trivia Question Category</label>
-            <select v-model="category" @change="showDetail"  name="category">
-                {% for cat in categories %}
-                <option value="{{cat.id}}">{{cat.name}}</option>
-                {% endfor %}
-            </select>
-            <p>placeholder for category fetch data <br>
-                Total Questions: <% totalQCount %> <br>
-                Easy Questions: <% totalEasyQCount %> <br>
-                Medium Questions: <% totalMedQCount %> <br>
-                Hard Questions: <% totalHardQCount %>
-            </p>
-        </div>
-        <label for=""># of questions</label>
-        <input type="number" name="questionNum">
+<div id=background>
+    <main>
 
-        <input type="submit" value="Create Game">
-    </form>
+        <form action="{% url 'trivia:create_game' %}" method="post">
+            {% csrf_token %}
+            <label for="GameLeagueName">Enter Game Name</label>
+            <input type="text" name="GameLeagueName"><br><br>
+            
+            <!-- <label for="PlayerNum">Select number of Teams/Players</label>
+            <select class="dark_item" name="PlayerNum">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+                <option value=9>9</option>
+                <option value=10>10</option>
+            </select><br><br> -->
+            <div id="get-category-data">
+                <label for="Category">Trivia Question Category</label>
+                <select class="dark_item" v-model="category" @change="showDetail"  name="category">
+                    {% for cat in categories %}
+                    <option value="{{cat.id}}">{{cat.name}}</option>
+                    {% endfor %}
+                </select>
+                <p id='cat-desc'>placeholder for category fetch data <br>
+                    Total Questions: <% totalQCount %> <br>
+                    Easy Questions: <% totalEasyQCount %> <br>
+                    Medium Questions: <% totalMedQCount %> <br>
+                    Hard Questions: <% totalHardQCount %>
+                </p>
+            </div><br><br>
+            <label for=""># of questions</label>
+            <input class="dark_item" type="number" max="<% totalQCount %>" name="questionNum">
+    
+            <input class="dark_item" type="submit" value="Create Game">
+        </form>
+    </main>
 </div>
 <script>
     let app = new Vue({

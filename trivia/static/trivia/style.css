@@ -1,0 +1,85 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.52)
+}
+
+html, body
+{
+    height: 100%;
+    margin:0;
+    padding:0;
+    background-color: rgba(0, 0, 0, 0.52);
+}
+
+#background {
+    position:relative;
+    height: 100%;
+    width:100%;
+    background-image: url('logo-big.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%; 
+}
+
+main {
+    
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    border: solid black;
+
+    text-align: center;
+}
+
+main img {
+    size: 50%;
+}
+
+main div {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+body {
+    font-family: 'Alegreya Sans', sans-serif;
+    color: white;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.dark_item {
+    color: aliceblue;
+   
+}
+input[type=text] {
+    color: aliceblue;
+}
+
+form a {
+
+    position: inline;
+    background-color: red;
+    color: white;
+    padding: .25em .5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 1em;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+form input {
+    padding: 1em;
+}

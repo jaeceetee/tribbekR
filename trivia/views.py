@@ -15,7 +15,7 @@ def create_game(request):
 
         game_data = GameData()
         game_data.game_name = form['GameLeagueName']
-        game_data.player_num = form['PlayerNum']
+        game_data.player_num = 1
         game_data.question_num = form['questionNum']
         game_data.category = form['category']
         game_data.host = User.objects.get(id=request.user.id)
@@ -71,31 +71,12 @@ def create_game(request):
             
             question.save()
 
-        # Get first question to send to the question page
-        # question = Questions.objects.get(game_id = game_data, question_num = 1)
-
-        # multichoice = []    
-        # if question.truefalse == False:
-        #     multichoice.append(question.answer)
-        #     multichoice.append(question.wrong1)
-        #     multichoice.append(question.wrong2)
-        #     multichoice.append(question.wrong3)
-
-        # random.shuffle(multichoice)
-        
         print(game_data.host.username)
         request.session['game_id'] = game_data.pk
         request.session['host'] = True
         request.session['total_questions'] = game_data.question_num
 
-       
-
-        context = {
-            "game_num": game_data.game_name,
-            "questions": questions_to_send,
-        
-        }
-
+  
         return redirect('/trivia/' + str(game_data.game_id) + '/host_screen')
         # ('trivia/'+ str(game_data.game_id) + '/host_screen.html')
        
@@ -208,6 +189,7 @@ def host_screen(request, game_num):
         "game_num":game_num,
         "total_questions": total_questions,
         "questions": questions_to_send,
-        "serializedQ": QuestionSerializer(question_to_serialize, many=True).data
+        "serializedQ": QuestionSerializer(question_to_serialize, many=True).data,
+
     }
     return render(request, 'trivia/host_screen.html', context)

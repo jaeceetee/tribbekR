@@ -5,8 +5,17 @@ Home - {{user.username}}
 {% endblock %}
 
 {% block content %}
-<h1>hi {{user.username}}</h1>
-<a href="{% url 'trivia:create_game' %}">create game</a>
-<a href="{% url 'trivia:play_game' %}">play game</a>
+<div id='background'>
+    <main>
+        <div>
+            {% load static %}
+            <h1>hi {{user.username}}</h1>
+            <a href="{% url 'trivia:create_game' %}"><img src="{% static 'trivia/create.gif' %}" alt="create game"></a>
+            <a href="{% url 'trivia:play_game' %}"><img src="{% static 'trivia/play.gif' %}" alt="play"></a>
 
+        </div>
+    </main>
+
+</div>
+<a href="{% url 'Users:logout' %}">logout</a>
 {% endblock %}

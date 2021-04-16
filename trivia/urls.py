@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf.urls import url
 from .views import host_screen, play_game, user_list, player
+from django.conf import settings
 from . import views
 
 
@@ -21,4 +22,4 @@ urlpatterns = [
     url(r'^$', user_list, name='user_list'),
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
