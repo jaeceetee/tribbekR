@@ -24,9 +24,6 @@ from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from CapstoneProj.trivia.routing import websocket_urlpatterns
-from CapstoneProj.trivia import consumers
-
-
 
 
 application = ProtocolTypeRouter({
