@@ -18,7 +18,7 @@ from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from CapstoneProj.trivia.routing import websocket_urlpatterns
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CapstoneProj.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '.settings')
 django.setup()
 django_asgi_app = get_asgi_application()
 
