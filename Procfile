@@ -1,2 +1,2 @@
-release: cd CapstoneProj && python manage.py migrate
-web: cd CapstoneProj && gunicorn CapstoneProj.wsgi --log-file -
+web: daphne CapstoneProj.trivia.asgi:application --port $PORT --bind 0.0.0.0 -v2
+chatworker: cd CapstoneProj && python manage.py runworker --settings=CapstoneProj.settings -v

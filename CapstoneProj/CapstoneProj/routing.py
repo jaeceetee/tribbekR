@@ -1,6 +1,6 @@
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
-import trivia.routing
+from CapstoneProj import trivia
 
 application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack({
