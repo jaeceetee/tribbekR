@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 import os
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CapstoneProj.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 django_asgi_app = get_asgi_application()
 
