@@ -18,11 +18,11 @@ from django.conf import settings
 settings.configure(DEBUG=True)
 django.setup()
 
-django_asgi_app = get_asgi_application()
 
 from django.conf.urls import url
 from django.core.asgi import get_asgi_application
 
+django_asgi_app = get_asgi_application()
 from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
