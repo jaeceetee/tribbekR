@@ -7,8 +7,13 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 import os
+import sys
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'CapstoneProj.settings'
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstoneProj.settings")
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 django_asgi_app = get_asgi_application()
 
