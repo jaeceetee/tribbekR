@@ -37,7 +37,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
-    'app.trivia',
     'channels',
     'trivia',
     'Users',
