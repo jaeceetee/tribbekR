@@ -1,38 +1,53 @@
 {% extends 'trivia/base.html' %}
 
-{% block title %}Game - {{ game_name }}{% endblock %}
+{% block title %}Game - {{ game_num }}{% endblock %}
 
 {% block content %}
 <div id="game-display">
-    <H1 id="game-name">Game - {{ game_name }}</H1>
+    <H1 id="game-name">Game - {{ game_num }}</H1>
+    <h2 id="total_question">{{ total_questions }} </h2>
 </div>
 
 <div id="trivia">
-    {{question.question_num}}
-    {{question.question}}
-    
-    {% if question.truefalse == True %}
-        <input type="radio" name="answer" id="True" value="True">True
-        <input type="radio" name="answer" id="False" value="False">False
-    {% else %}
-        {% for choice in choices %}
-            <input type="radio" name="answer" id="{{ forloop.counter }} value="{{ forloop.counter }}"> {{ forloop.counter }} - {{choice}}
-        {% endfor %}
-    {% endif %}
-    <button id="next" v-bind:onclick="nextQuestion">Submit</button>
-</div>
-<div id="waiting">
-    <div id="players-list">
+    <div id='game' >
+        <h1>Question [[ currquestion_num ]]</h1>
+        <h2>[[ currquestion ]]</h2>
+        <section id="multiple" v-if="[[ currtruefalse ]] == 'true' ">
+            <ul>
+                <li>True</li>
+                <li>False</li>
+            </ul>
+        </section>
+        <section id="truefalse" v-else>
+            <ol>
+                <li> [[ curranswers[0] ]]</li>
+                <li> [[ curranswers[1] ]]</li>
+                <li> [[ curranswers[2] ]]</li>
+                <li> [[ curranswers[3] ]]</li>
+            </ol>
+        </section>
+        
+
+
+        <button id="next" v-on:click='nextQuestion'>next</button>
+        <button id="showanswers" v-on:click='showAnswers'>And the answer is...</button>
     </div>
-    <button>Let's Play</button>
+    <div id="waiting">
+        <div id="players-list">
+        </div>
+        <button v-on:click='startGame' >Let's Play</button>
+    </div>
 </div>
 
-<div id=""></div>
+
  
 <!-- takes game_num variable and passes it into script variable room-name -->
 {{ game_num|json_script:"room-name" }} 
+{{ serializedQ | json_script:"json-data" }}
 <script>
+    const value = JSON.parse(document.getElementById('json-data').textContent);
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    console.log(value)
     const chatSocket = new WebSocket(
         'ws://' +
         window.location.host +
@@ -41,25 +56,33 @@
         '/'
         
         );
+    function socket_startGame (e){
+        console.log(e)
+        chatSocket.send(JSON.stringify({
+            "message":"start"
+        }))
+    }
+
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         console.log(data)
         if (data.player != null){
             let player_div = document.getElementById('players-list')
-            let player = document.createElement('h3')
-
-            let num = player_div.childElementCount + 1
+            let player = document.createElement('button')
             
-            player.id = data.player
-            player.innerText = num + ": " + data.player
+            let num = player_div.childElementCount + 1
+            player.name = num
+            player.value = data.player
+            player.innerText = data.player
+
             player_div.appendChild(player)
 
-        } else if((data.remove_player != null)){
+        } else if(data.remove_player != null){
             let player_div = document.getElementById('players-list')
             let remove_player = document.getElementById(data.remove_player)
 
             player_div.removeChild(remove_player)
-        }
+        } 
     }
 </script>
 

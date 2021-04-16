@@ -14,7 +14,9 @@ class GameData(models.Model):
     category = models.IntegerField()
     league_id = models.ForeignKey("LeagueData", on_delete=models.CASCADE, blank=True, null=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE)
-    playing_yn = models.BooleanField(default=True)
+    # status will be 'wait', 'play', and 'end'
+    status = models.CharField(max_length=5 ,default="wait") #playing_yn - changing to denote status of the game
+    # total_questions = models.IntegerField()
     play_DT = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:

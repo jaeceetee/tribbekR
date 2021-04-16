@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
+from .serializer import QuestionSerializer
 import requests, json, random
 
 # Create Game
@@ -39,21 +40,35 @@ def create_game(request):
 
         num = 0
         
+        questions_to_send={}
         for items in json_data['results']:
             num += 1
             question = Questions()
+            
             question.game_id = game_data
             question.question_num = num
             question.question = items['question']
             question.answer = items['correct_answer']
+            questions_to_send[num] ={
+                "question_num": num,
+                "question": items['question'],
+                "answer": items['correct_answer']
+            }
             if items['type'] == 'multiple':
                 question.wrong1 = items['incorrect_answers'][0]
                 question.wrong2 = items['incorrect_answers'][1]
                 question.wrong3 = items['incorrect_answers'][2]
                 
                 question.truefalse = False
+                questions_to_send[num]["truefalse"] = False
+                questions_to_send[num]["wrong1"] = items['incorrect_answers'][0]
+                questions_to_send[num]["wrong2"] = items['incorrect_answers'][1]
+                questions_to_send[num]["wrong3"] = items['incorrect_answers'][2]
+
             else:
                 question.truefalse = True
+                questions_to_send[num]["truefalse"] = True
+            
             question.save()
 
         # Get first question to send to the question page
@@ -71,9 +86,19 @@ def create_game(request):
         print(game_data.host.username)
         request.session['game_id'] = game_data.pk
         request.session['host'] = True
+        request.session['total_questions'] = game_data.question_num
 
-        return redirect('/trivia/' + str(game_data.game_id) + '/host_screen', game_name=game_data.game_name)
+       
+
+        context = {
+            "game_num": game_data.game_name,
+            "questions": questions_to_send,
+        
+        }
+
+        return redirect('/trivia/' + str(game_data.game_id) + '/host_screen')
         # ('trivia/'+ str(game_data.game_id) + '/host_screen.html')
+       
     elif request.method == "GET":
         url = 'https://opentdb.com/api_category.php'
         
@@ -126,7 +151,7 @@ def play_game(request):
     #Check for playable rooms
     
     try:
-        open_games = GameData.objects.filter(playing_yn=True)
+        open_games = GameData.objects.filter(status="wait")
     except:
         return render(request, 'trivia/play_game.html')
 
@@ -150,7 +175,39 @@ def question(request, room_name, question_num):
     })
 
 def host_screen(request, game_num):
+    total_questions = request.session['total_questions']
+    questions = Questions.objects.filter(game_id=game_num)
+    questions_to_send = []
+    for q in questions:
+        if q.truefalse == True:
+            questions_to_send.append({
+                "question_num": q.question_num,
+                "question": q.question,
+                "truefalse": q.truefalse,
+                "answer": q.answer
+            })
+        else:
+            questions_to_send.append({
+                "question_num": q.question_num,
+                "question": q.question,
+                "truefalse": q.truefalse,
+                "answer": q.answer,
+                "choices": [
+                    q.wrong1,
+                    q.wrong2,
+                    q.wrong3,
+                    q.answer
+                ]
+            })
+        
+        question_to_serialize = Questions.objects.filter(game_id=game_num)
+
+
+    print(questions)
     context = {
-        "game_num":game_num
+        "game_num":game_num,
+        "total_questions": total_questions,
+        "questions": questions_to_send,
+        "serializedQ": QuestionSerializer(question_to_serialize, many=True).data
     }
     return render(request, 'trivia/host_screen.html', context)

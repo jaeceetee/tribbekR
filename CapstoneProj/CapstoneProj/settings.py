@@ -26,7 +26,10 @@ SECRET_KEY = 'j7q%xmn+4#pl!n2=$=e42eix*%_dmfq(jd+9ro%y8j3i*-!0)6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tribbekr.herokuapp.com']
+ALLOWED_HOSTS = [
+    'tribbekr.herokuapp.com',
+    'localhost',
+    ]
 
 
 # Application definition
@@ -53,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # other stuff
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'CapstoneProj.urls'
@@ -137,12 +140,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
-CACHES = {
-    "default": {
-         "BACKEND": "redis_cache.RedisCache",
-         "LOCATION": os.environ.get('HEROKU_REDIS_ROSE_URL'),
-    }
-}
+
 if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES = {'default': dj_database_url.config()}
