@@ -7,19 +7,19 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 import os
-from CapstoneProj.trivia import consumers
+import django
+django.setup()
 
 from django.conf.urls import url
 from django.core.asgi import get_asgi_application
 
-import django
 from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from CapstoneProj.trivia.routing import websocket_urlpatterns
+from CapstoneProj.trivia import consumers
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', '.settings')
-django.setup()
 django_asgi_app = get_asgi_application()
 
 application = ProtocolTypeRouter({
