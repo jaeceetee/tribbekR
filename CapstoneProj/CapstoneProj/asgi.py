@@ -14,7 +14,9 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'CapstoneProj.CapstoneProj.settings'
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstonProj.CapstoneProj.settings")
 import django
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
-django.setup()
+# django.setup()
+from django.conf import settings
+settings.configure(DEBUG=True)
 django_asgi_app = get_asgi_application()
 
 from django.conf.urls import url
