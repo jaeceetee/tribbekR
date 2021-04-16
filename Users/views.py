@@ -11,6 +11,7 @@ def register_user(request):
         username = form['username']
         email = form['email']
         password = form['password']
+        message = ''
 
         if not User.objects.filter(username=username).exists():
             user = User()
@@ -23,11 +24,14 @@ def register_user(request):
 
             return HttpResponseRedirect(reverse('Users:user_home'))
         else:
-            context = {
-                "error": "Username has been taken! Try a new username!"
-            }
+            message = "Username has been taken! Try a new username!"
+        context = {
+            "error": message
+        }
 
-    return render(request, 'Users/register.html', context)
+        return render(request, 'Users/register.html', context)
+    else:
+        return render(request, 'Users/register.html')
 
 def login_user(request):
     if request.user.is_authenticated:
