@@ -2,7 +2,6 @@
 import json
 from random import shuffle
 from typing import NoReturn
-from trivia.views import play_game
 from channels.db import database_sync_to_async
 from asgiref.sync import sync_to_async
 from .models import GameData, PlayerData, ScoreData, Questions
