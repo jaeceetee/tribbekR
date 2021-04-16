@@ -21,7 +21,6 @@ pycairo==1.20.0
 pycparser==2.20
 PyGObject==3.40.1
 pyOpenSSL==20.0.1
-python-libtorrent==1.2.10
 pytz==2021.1
 redis==3.5.3
 service-identity==18.1.0

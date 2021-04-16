@@ -10,7 +10,7 @@ import os
 import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'CapstoneProj.CapstoneProj.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'CapstoneProj.settings'
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstonProj.CapstoneProj.settings")
 import django
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
@@ -26,7 +26,7 @@ django_asgi_app = get_asgi_application()
 from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
-from CapstoneProj.trivia.routing import websocket_urlpatterns
+from trivia.routing import websocket_urlpatterns
 
 
 application = ProtocolTypeRouter({
