@@ -6,16 +6,17 @@ It exposes the ASGI callable as a module-level variable named ``application``.
 For more information on this file, see
 https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
+from pathlib import Path
 import os
 import sys
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(BASE_DIR)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'CapstoneProj.settings'
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstonProj.CapstoneProj.settings")
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CapstoneProj.settings")
 import django
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
-from django.conf import settings
-settings.configure(DEBUG=True)
+
+# from django.conf import settings
+# settings.configure(DEBUG=True)
 django.setup()
 
 
