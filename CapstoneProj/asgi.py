@@ -28,6 +28,7 @@ from channels.http import AsgiHandler
 from channels.routing import ChannelNameRouter, ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from trivia.routing import websocket_urlpatterns
+from channels.security.websocket import OriginValidator
 
 
 application = ProtocolTypeRouter({
@@ -36,9 +37,13 @@ application = ProtocolTypeRouter({
   #   "update-question": consumers.question.as_asgi(),
 
   # }),
-  'websocket': AuthMiddlewareStack(URLRouter(
-      websocket_urlpatterns
-    )
+  'websocket': OriginValidator(
+    AuthMiddlewareStack(
+      URLRouter(
+        websocket_urlpatterns
+      )
+    ),
+    [".heroku.com", "https://.heroku.com:80"],
   )
   ## IMPORTANT::Just HTTP for now. (We can add other protocols later.)
 })
