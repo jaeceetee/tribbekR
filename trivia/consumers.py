@@ -46,23 +46,23 @@ class TriviaConsumer(AsyncWebsocketConsumer):
         }))
 
     @database_sync_to_async
-    async def create_score_data(self, player, game):
+    def create_score_data(self, player, game):
         score = ScoreData(game_id=game.game_id, player_id=player.player_id)
         score.save()
         NoReturn
 
     @database_sync_to_async
-    async def delete_score_data(self, player, game):
+    def delete_score_data(self, player, game):
         score = ScoreData.objects.filter(game_id=game.game_id, player_id=player.player_id)
         score.delete()
 
     @database_sync_to_async
-    async def get_game_data(self):
+    def get_game_data(self):
         game = GameData.objects.get(game_id = self.room_name)
         return game
     
     @database_sync_to_async
-    async def get_player_data(self):
+    def get_player_data(self):
         if PlayerData.objects.get(name = self.user.username) is None:
             player = PlayerData(name = self.user.username)
             player.save()
@@ -141,7 +141,7 @@ class TriviaConsumer(AsyncWebsocketConsumer):
         }))
 
     @database_sync_to_async
-    async def get_first_question_data(self):
+    def get_first_question_data(self):
         print("question database!")
         questions = (Questions.objects.filter(game_id=self.room_name, question_num=1))
         for question in questions:
