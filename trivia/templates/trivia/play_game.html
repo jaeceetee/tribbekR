@@ -7,14 +7,22 @@ Game Rooms
 
 {% block content %}
 {% for game in open_games %}
-    <div id={{ game.game_name }}>
-        <a href="/trivia/{{game.game_id}}/player_screen">
-            <h1>{{ game.game_name }}</h1>
-            <h2>{{ game.game_id }}</h2>
-        </a>
+<div id="background">
+    <main>
+        <div id="rooms">
 
+        </div>
 
-    </div>
+        <div id={{ game.game_name }}>
+            <a href="/trivia/{{game.game_id}}/player_screen">
+                <h1>{{ game.game_name }}</h1>
+                <h2>{{ game.game_id }}</h2>
+            </a>
+            
+            
+        </div>
+    </main>
+</div>
 {% endfor %}
 
 {%  endblock %}

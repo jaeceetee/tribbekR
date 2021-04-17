@@ -83,3 +83,13 @@ form {
 form input {
     padding: 1em;
 }
+
+#room div a {
+    position: inline;
+    background-color: red;
+    color: white;
+    padding: .25em .5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 1em;
+}
